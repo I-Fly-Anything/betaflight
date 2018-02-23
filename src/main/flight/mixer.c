@@ -665,7 +665,7 @@ static void applyMixToMotors(float motorMix[MAX_SUPPORTED_MOTORS])
         } else {
             motorOutput = constrain(motorOutput, motorRangeMin, motorRangeMax);
 	    if (i==3 || i == 0) {
-		motorOutput = -(motorOutput-1500)+1500;
+		motorOutput = -(motorOutput-1500)+1500;   // reverse some of the servos
 	    }
         }
         // Motor stop handling
@@ -707,7 +707,7 @@ void mixTable(timeUs_t currentTimeUs, uint8_t vbatPidCompensation)
     }
 
     if (motorOutputMixSign == 1) {
-        scaledAxisPidYaw = -scaledAxisPidYaw;
+        scaledAxisPidYaw = -scaledAxisPidYaw;   // Yaw is reversed when collective pitch quads are inverted
     }
     // Calculate voltage compensation
     const float vbatCompensationFactor = vbatPidCompensation ? calculateVbatPidCompensation() : 1.0f;
